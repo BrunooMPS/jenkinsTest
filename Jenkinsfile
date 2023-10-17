@@ -4,10 +4,11 @@ pipeline {
         stage('build') {
             steps {
                 script {
-                    def skipSecondScript=false
-                    echo 'Hello from false'
+                    def skipSecondScript=true
+                    bat "script1.bat"
+                    
                     if (skipSecondScript == true) {
-                        echo 'Hello from true and false'
+                        bat "script2.bat"
                     }
                 }
             }
