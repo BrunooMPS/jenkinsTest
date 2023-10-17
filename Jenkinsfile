@@ -4,11 +4,11 @@ pipeline {
         stage('build') {
             steps {
                 script {
-                    def skipSecondScript = true
-                        Runtime.runtime.exec("script1.bat")
+                    def skipSecondScript = true                    
+                    bat "script1.bat"
                     
-                    if (skipSecondScript == true) {
-                        Runtime.runtime.exec("script2.bat")
+                    if (skipSecondScript) {
+                        bat "script2.bat"
                     }
                 }
             }
