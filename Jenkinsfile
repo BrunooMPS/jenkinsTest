@@ -5,10 +5,10 @@ pipeline {
             steps {
                 script {
                     def skipSecondScript=true
-                    bat "script1.bat"
+                    sh "script1.sh"
                     
                     if (skipSecondScript == true) {
-                        bat "script2.bat"
+                        sh "script2.sh"
                     }
                 }
             }
