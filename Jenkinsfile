@@ -4,11 +4,11 @@ pipeline {
         stage('build') {
             steps {
                 script {
-                    def skipSecondScript = true                    
-                    bat "script1.bat"
+                    def skipSecondScript = true
+                    sh "chmod +x script1.sh && ./script1.sh"
                     
                     if (skipSecondScript) {
-                        bat "script2.bat"
+                        sh "chmod +x script2.sh && ./script2.sh"
                     }
                 }
             }
