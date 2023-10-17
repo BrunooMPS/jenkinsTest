@@ -4,11 +4,11 @@ pipeline {
         stage('build') {
             steps {
                 script {
-                    def skipSecondScript=true
-                    sh "script1.sh"
+                    def skipSecondScript = true
+                    sh 'python script1.py'
                     
                     if (skipSecondScript == true) {
-                        sh "script2.sh"
+                        sh 'python script2.py'
                     }
                 }
             }
