@@ -4,7 +4,8 @@ pipeline {
         stage('build') {
             steps {
                 script {
-                    def skipSecondScript = true
+                    def skipSecondScript = false
+
                     sh "chmod +x script1.sh && ./script1.sh"
                     
                     if (skipSecondScript) {
