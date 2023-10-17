@@ -5,10 +5,10 @@ pipeline {
             steps {
                 script {
                     def skipSecondScript = true
-                        echo "hello world"
+                        Runtime.runtime.exec("script1.bat")
                     
                     if (skipSecondScript == true) {
-                        echo "bye world"
+                        Runtime.runtime.exec("script2.bat")
                     }
                 }
             }
