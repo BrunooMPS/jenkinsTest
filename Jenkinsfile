@@ -5,10 +5,10 @@ pipeline {
             steps {
                 script {
                     def skipSecondScript = true
-                        sh script1.sh
+                        echo "hello world"
                     
                     if (skipSecondScript == true) {
-                        sh script2.sh
+                        echo "bye world"
                     }
                 }
             }
