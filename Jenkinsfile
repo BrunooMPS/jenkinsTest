@@ -5,10 +5,10 @@ pipeline {
             steps {
                 script {
                     def skipSecondScript = true
-                    sh 'python script1.py'
+                    sh 'python3 script1.py'
                     
                     if (skipSecondScript == true) {
-                        sh 'python script2.py'
+                        sh 'python3 script2.py'
                     }
                 }
             }
