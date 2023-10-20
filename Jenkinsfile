@@ -58,5 +58,5 @@ def runSecondScript() {
   echo "PUSHING"
   sh "git add ."
   sh "git commit -m 'Commit message'"
-  sh "git push -u -f origin master"
+  sh "git push -u -f origin main"
 }
