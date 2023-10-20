@@ -1,14 +1,16 @@
 pipeline {
     agent any
+    parameters {
+  booleanParam 'RUN_SECOND_SCRIPT'
+}
     stages {
         stage('build') {
             steps {
                 script {
-                    def skipSecondScript = true
 
                     sh "chmod +x script1.sh && ./script1.sh"
                     
-                    if (skipSecondScript) {
+                    if (${params.RUN_SECOND_SCRIPT}) {
                         sh "chmod +x script2.sh && ./script2.sh"
                     }
                 }
