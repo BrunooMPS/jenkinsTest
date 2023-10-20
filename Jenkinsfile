@@ -7,16 +7,24 @@ pipeline {
         booleanParam(defaultValue: false, description: 'Run the second script', name: 'RUN_SECOND_SCRIPT')
     }
     stages {
-        stage('Requirements'){
-            steps{
-                script{
-                    if(params.RUN_FIRST_REQUIREMENT && params.RUN_SECOND_REQUIREMENT && params.RUN_THIRD_REQUIREMENT){
-                        echo "Requirements PASSED, Push allowed on next build"
-                    }
+        stage('Requirements') {
+            steps {
+                script {
+                    // Define the list of requirement parameters
+                    def requirementParams = [
+                        params.RUN_FIRST_REQUIREMENT,
+                        params.RUN_SECOND_REQUIREMENT,
+                        params.RUN_THIRD_REQUIREMENT,
+                        // Add more parameters here for additional requirements
+                    ]
+
+                    if (requirementParams.every { it }) {
+                        echo "All requirements PASSED, Push allowed on next build"
+                    }else{echo "Not all Conditions met, Push NOT allowed on next build"}
                 }
             }
         }
-        stage('Hello') {
+        stage('Run') {
             steps {
                 script {
                     //echo "RUN_SECOND_SCRIPT: ${params.RUN_SECOND_SCRIPT}"
