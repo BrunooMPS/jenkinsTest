@@ -9,6 +9,11 @@ pipeline {
   }
 
   stages {
+    stage('Repository') {
+      steps{
+        git 'https://github.com/BrunooMPS/jenkinsTest.git'
+      }
+    }
     stage('Requirements') {
       when {
         expression {
@@ -56,8 +61,5 @@ def checkRequirements() {
 
 def runSecondScript() {
   echo "PUSHING"
-  sh "git add ."
-  sh "git commit -m 'Commit message'"
-  sh "git remote add origin https://github.com/BrunooMPS/jenkinsTest.git"
-  sh "git push -u -f origin main"
-}
+  
+  }
