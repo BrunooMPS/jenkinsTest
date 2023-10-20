@@ -56,5 +56,7 @@ def checkRequirements() {
 
 def runSecondScript() {
   echo "PUSHING"
+  sh "git add ."
+  sh "git commit -m 'Commit message'"
   sh "git push origin main"
 }
