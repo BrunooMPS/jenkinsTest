@@ -11,7 +11,7 @@ pipeline {
 
   stages {
 
-    stage{
+    stage('Pull'){
       when{
         expression{
             params.RUN_FIRST_SCRIPT == true
