@@ -2,7 +2,6 @@ pipeline {
   agent any
 
   parameters {
-    booleanParam(defaultValue: false, description: 'Run the first requirement', name: 'RUN_FIRST_SCRIPT')
     booleanParam(defaultValue: false, description: 'Run the first requirement', name: 'RUN_FIRST_REQUIREMENT')
     booleanParam(defaultValue: false, description: 'Run the second requirement', name: 'RUN_SECOND_REQUIREMENT')
     booleanParam(defaultValue: false, description: 'Run the third requirement', name: 'RUN_THIRD_REQUIREMENT')
@@ -10,7 +9,6 @@ pipeline {
   }
 
   stages {
-    
     stage('Requirements') {
       when {
         expression {
