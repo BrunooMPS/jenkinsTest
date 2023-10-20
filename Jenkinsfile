@@ -9,8 +9,10 @@ pipeline {
     stages {
         stage('Requirements'){
             steps{
-                if(params.RUN_FIRST_REQUIREMENT && params.RUN_SECOND_REQUIREMENT && params){
-                    echo "Requirements PASSED, Push allowed on next build"
+                script{
+                    if(params.RUN_FIRST_REQUIREMENT && params.RUN_SECOND_REQUIREMENT && params){
+                        echo "Requirements PASSED, Push allowed on next build"
+                    }
                 }
             }
         }
