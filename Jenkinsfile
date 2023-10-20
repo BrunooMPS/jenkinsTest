@@ -55,7 +55,6 @@ def checkRequirements() {
 }
 
 def runSecondScript() {
-  //echo "PUSHING"
-  sh "git commit -m "initial commit" "
-  sh "git push origin main"
+  echo "PUSHING"
+  //sh "git push origin main"
 }
