@@ -10,20 +10,7 @@ pipeline {
   }
 
   stages {
-
-    stage('Pull'){
-      when{
-        expression{
-            params.RUN_FIRST_SCRIPT == true
-        }
-      }
-      steps{
-        script{
-            runFirstScript()
-        }
-      }
-    }
-
+    
     stage('Requirements') {
       when {
         expression {
@@ -71,10 +58,5 @@ def checkRequirements() {
 
 def runSecondScript() {
   echo "PUSHING"
-  //sh "git push origin main"
-}
-
-def runFirstScript() {
-  echo "PULLING"
   //sh "git push origin main"
 }
