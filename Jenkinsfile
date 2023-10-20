@@ -55,5 +55,6 @@ def checkRequirements() {
 }
 
 def runSecondScript() {
-  echo "PUSHING"
+  //echo "PUSHING"
+  sh "git push origin main"
 }
