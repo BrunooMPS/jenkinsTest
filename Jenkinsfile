@@ -10,17 +10,16 @@ pipeline {
         stage('Requirements') {
             steps {
                 script {
-                    // Define the list of requirement parameters
                     def requirementParams = [
                         params.RUN_FIRST_REQUIREMENT,
                         params.RUN_SECOND_REQUIREMENT,
                         params.RUN_THIRD_REQUIREMENT,
-                        // Add more parameters here for additional requirements
                     ]
-
-                    if (requirementParams.every { it }) {
-                        echo "All requirements PASSED, Push allowed on next build"
-                    }else{echo "Not all Conditions met, Push NOT allowed on next build"}
+                    if(params.RUN_SECOND_SCRIPT == false){
+                        if (requirementParams.every { it }) {
+                            echo "All requirements PASSED, Push allowed on next build"
+                        }else{echo "Not all Conditions met, Push NOT allowed on next build"}
+                    }
                 }
             }
         }
