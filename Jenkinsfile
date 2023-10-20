@@ -9,11 +9,6 @@ pipeline {
   }
 
   stages {
-    stage('Repository') {
-      steps{
-        git 'https://github.com/BrunooMPS/jenkinsTest.git'
-      }
-    }
     stage('Requirements') {
       when {
         expression {
