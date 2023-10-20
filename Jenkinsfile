@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    parameters {
+        booleanParam(defaultValue: false, description: 'Run the second script', name: 'RUN_SECOND_SCRIPT')
+    }
     stages {
         stage('Hello') {
             steps {
