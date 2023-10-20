@@ -2,6 +2,7 @@ pipeline {
   agent any
 
   parameters {
+    booleanParam(defaultValue: false, description: 'Run the first requirement', name: 'RUN_FIRST_SCRIPT')
     booleanParam(defaultValue: false, description: 'Run the first requirement', name: 'RUN_FIRST_REQUIREMENT')
     booleanParam(defaultValue: false, description: 'Run the second requirement', name: 'RUN_SECOND_REQUIREMENT')
     booleanParam(defaultValue: false, description: 'Run the third requirement', name: 'RUN_THIRD_REQUIREMENT')
@@ -9,6 +10,20 @@ pipeline {
   }
 
   stages {
+
+    stage{
+      when{
+        expression{
+            params.RUN_FIRST_SCRIPT == true
+        }
+      }
+      steps{
+        script{
+            runFirstScript()
+        }
+      }
+    }
+
     stage('Requirements') {
       when {
         expression {
@@ -22,7 +37,7 @@ pipeline {
       }
     }
 
-    stage('Run') {
+    stage('Push') {
       when {
         expression {
           params.RUN_SECOND_SCRIPT == true
@@ -56,5 +71,10 @@ def checkRequirements() {
 
 def runSecondScript() {
   echo "PUSHING"
+  //sh "git push origin main"
+}
+
+def runFirstScript() {
+  echo "PULLING"
   //sh "git push origin main"
 }
