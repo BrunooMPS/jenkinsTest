@@ -1,10 +1,10 @@
 pipeline {
     agent any
     parameters {
-        booleanParam 'RUN_SECOND_SCRIPT'
+        booleanParam name: 'RUN_SECOND_SCRIPT'
         }
     stages {
-        stage('build') {
+        stage('Hello') {
             steps {
                 //sh "chmod +x script1.sh && ./script1.sh"
                 echo "${RUN_SECOND_SCRIPT}"
