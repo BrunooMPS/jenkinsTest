@@ -55,6 +55,9 @@ def checkRequirements() {
 }
 
 def runSecondScript() {
+  sh "git config user.email 'brunosusana99@hotmail.com'"
+  sh "git config user.name 'bruno'"
+  
   echo "PUSHING"
   sh "git add ."
   sh "git commit -m 'Commit message'"
