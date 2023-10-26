@@ -9,6 +9,14 @@ pipeline {
   }
 
   stages {
+    stage('checkout') {
+      steps {
+        script {
+          checkout scm
+        }
+      }
+    }
+
     stage('Requirements') {
       when {
         expression {
@@ -50,11 +58,11 @@ pipeline {
 
 def runSecondScript() {
   if (params.COMMIT_AND_PUSH) {
-        echo "Committing and Pushing changes"
-        sh "git add ."
-        sh "git commit -m 'updated file'"
-        sh "git push -u origin main"
-    } else {
-        echo "No changes to commit and push."
-    }
+    echo "Committing and Pushing changes"
+    sh "git add ."
+    sh "git commit -m 'updated file'"
+    sh "git push -u origin main"
+  } else {
+    echo "No changes to commit and push."
+  }
 }
