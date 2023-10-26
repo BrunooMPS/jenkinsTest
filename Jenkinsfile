@@ -24,7 +24,6 @@ pipeline {
       }
     }
 
-    stages {
     stage('Clone') {
         steps {
             script {
@@ -44,12 +43,10 @@ pipeline {
                 //} else {
                     // Clone without credentials
                     sh "git clone -b ${gitBranch} ${gitRepositoryURL}"
-               // }
+                //}
             }
         }
     }
-    // ... other stages
-}
 
 }
   post {
