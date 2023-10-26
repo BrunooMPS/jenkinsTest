@@ -41,8 +41,8 @@ pipeline {
     steps {
         script {
             try {
-                // Use the pre-configured Git settings from Jenkins.
-                gitPush(branch: 'main', tag: '', credentialsId: '', url: '')
+                // Assuming the Git credentials and URL are pre-configured in Jenkins.
+                sh 'git push origin main'
             } catch (Exception e) {
                 currentBuild.result = 'FAILURE'
                 error("Failed to commit and push: ${e.message}")
