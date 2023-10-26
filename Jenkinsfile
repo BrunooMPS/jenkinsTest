@@ -17,7 +17,9 @@ pipeline {
       }
       steps {
         script {
-          checkRequirements()
+          if (params.RUN_FIRST_REQUIREMENT && params.RUN_SECOND_REQUIREMENT && params.RUN_THIRD_REQUIREMENT) {
+            echo "All requirements PASSED, Push allowed on the next build"
+          }
         }
       }
     }
@@ -43,12 +45,6 @@ pipeline {
     failure {
       echo "Pipeline failed"
     }
-  }
-}
-
-def checkRequirements() {
-  if (params.RUN_FIRST_REQUIREMENT && params.RUN_SECOND_REQUIREMENT && params.RUN_THIRD_REQUIREMENT) {
-    echo "All requirements PASSED, Push allowed on the next build"
   }
 }
 
