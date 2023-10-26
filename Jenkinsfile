@@ -9,7 +9,6 @@ pipeline {
   }
 
   stages {
-    
     stage('Requirements') {
       when {
         expression {
@@ -33,7 +32,14 @@ pipeline {
       }
       steps {
         script {
-          runSecondScript()
+          // Perform the commit and push operation here
+          /*sh 'git config --global user.email "you@example.com"'
+          sh 'git config --global user.name "Your Name"'
+          sh 'git clone <repository_url>'
+          sh 'cd <repository_directory>'
+          sh 'git add .'
+          sh 'git commit -m "Commit message"'
+          sh 'git push origin master'*/
         }
       }
     }
@@ -47,11 +53,4 @@ pipeline {
       echo "Pipeline failed"
     }
   }
-}
-
-def runSecondScript() {
-    echo "Committing and Pushing changes"
-    sh "git add ."
-    sh "git commit -m 'updated file'"
-    sh "git push -u origin main"
 }
