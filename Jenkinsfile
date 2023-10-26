@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   parameters {
-    booleanParam(defaultValue: false, description: 'Run clone script', name: 'RUN_FIRST_SCRIPT')
+    booleanParam(defaultValue: false, description: 'Run clone script (paste the url in REPO_URL)', name: 'RUN_FIRST_SCRIPT')
     booleanParam(defaultValue: false, description: 'Run the first requirement', name: 'RUN_FIRST_REQUIREMENT')
     booleanParam(defaultValue: false, description: 'Run the second requirement', name: 'RUN_SECOND_REQUIREMENT')
     booleanParam(defaultValue: false, description: 'Run the third requirement', name: 'RUN_THIRD_REQUIREMENT')
