@@ -32,15 +32,7 @@ pipeline {
       }
       steps {
         script {
-          // Perform the commit and push operation here
-          /*sh 'git config --global user.email "you@example.com"'
-          sh 'git config --global user.name "Your Name"'
-          sh 'git clone <repository_url>'
-          sh 'cd <repository_directory>'
-          sh 'git add .'
-          sh 'git commit -m "Commit message"'
-          sh 'git push origin master'*/
-          sh 'echo hello'
+          sh "git push origin ${BRANCH_NAME}"
         }
       }
     }
