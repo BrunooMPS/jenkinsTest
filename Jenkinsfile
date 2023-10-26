@@ -25,18 +25,28 @@ pipeline {
     }
 
     stage('Push') {
-      when {
+    when {
         expression {
-          params.RUN_SECOND_SCRIPT == true
+            params.RUN_SECOND_SCRIPT == true
         }
-      }
-      steps {
-        script {
-          sh "git push origin main"
-        }
-      }
     }
-  }
+    steps {
+        script {
+
+            // Check for changes in the repository
+            def changes = sh(returnStatus: true, script: 'git diff --exit-code')
+
+            // If there are changes, commit and push them
+            if (changes != 0) {
+                sh 'git add .'
+                sh "git commit -m 'test'"
+                sh "git push origin main"
+            } else {
+                echo "No changes detected in the repository."
+            }
+        }
+    }
+}
 
   post {
     success {
