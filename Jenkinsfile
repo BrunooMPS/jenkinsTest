@@ -6,10 +6,6 @@ pipeline {
     booleanParam(defaultValue: false, description: 'Run the second requirement', name: 'RUN_SECOND_REQUIREMENT')
     booleanParam(defaultValue: false, description: 'Run the third requirement', name: 'RUN_THIRD_REQUIREMENT')
     booleanParam(defaultValue: false, description: 'Run the second script', name: 'RUN_SECOND_SCRIPT')
-
-    string(name: 'GIT_USER_NAME', defaultValue: 'Your Name', description: 'Git user name')
-    string(name: 'GIT_USER_EMAIL', defaultValue: 'you@example.com', description: 'Git user email')
-    string(name: 'GIT_REPO_URL', defaultValue: 'https://example.com/your-repo.git', description: 'Git repository URL')
   }
 
   stages {
@@ -57,18 +53,12 @@ def checkRequirements() {
 }
 
 def runSecondScript() {
-    // Check if there are changes to commit
-    def hasChanges = sh(script: 'git status --porcelain', returnStatus: true) == 0
-
-    if (hasChanges) {
-        // Perform a Git commit
-        sh "git config --global user.name 'params.GIT_USER_NAME'"
-        sh "git config --global user.email 'params.GIT_USER_EMAIL'"
-        sh "git commit -am 'Auto-commit changes'"
-
-        // Push changes to the remote repository
-        sh "git push params.GIT_REPO_URL"
+  if (params.COMMIT_AND_PUSH) {
+        echo "Committing and Pushing changes"
+        sh "git add ."
+        sh "git commit -m 'updated file'"
+        sh "git push -u origin main"
     } else {
-        echo "No changes to commit or push."
+        echo "No changes to commit and push."
     }
 }
