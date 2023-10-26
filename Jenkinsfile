@@ -34,17 +34,17 @@ pipeline {
         script {
 
             // Check for changes in the repository
-            //def changes = sh(returnStatus: true, script: 'git diff --exit-code')
+            def changes = sh(returnStatus: true, script: 'git diff --exit-code')
             println(changes)
             println("hahahahahaha")
             // If there are changes, commit and push them
-            //if (changes != 0) {
+            if (changes != 0) {
                 sh 'git add .'
                 sh "git commit -m 'test'"
                 sh "git push origin main"
-           // } else {
-           //     echo "No changes detected in the repository."
-           // }
+            } else {
+                echo "No changes detected in the repository."
+            }
         }
     }
   }
