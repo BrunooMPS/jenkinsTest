@@ -24,7 +24,7 @@ pipeline {
       }
     }
 
-    stage('Push') {
+    stage('Clone') {
     when {
         expression {
             params.RUN_SECOND_SCRIPT == true
@@ -32,15 +32,8 @@ pipeline {
     }
     steps {
         script {
-          
-            // If there are changes, commit and push them
-            //if (sh(returnStatus: true, script: 'git diff --exit-code') != 0) {
-                sh 'git add .'
-                sh "git commit -m 'test'"
-                sh "git push origin ce7d7f1e04e526a19b9fdb98d6cd86247d7844ee"
-            //} else {
-              //  echo "No changes detected in the repository."
-            //}
+          def url = "https://github.com/BrunooMPS/jenkinsTest.git"
+          sh 'git clone url'
         }
     }
   }
