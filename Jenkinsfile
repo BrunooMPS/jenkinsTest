@@ -9,14 +9,7 @@ pipeline {
   }
 
   stages {
-    stage('checkout') {
-      steps {
-        script {
-          checkout scm
-        }
-      }
-    }
-
+    
     stage('Requirements') {
       when {
         expression {
