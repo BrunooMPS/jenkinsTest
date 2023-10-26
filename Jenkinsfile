@@ -49,18 +49,17 @@ pipeline {
 def checkRequirements() {
   if (params.RUN_FIRST_REQUIREMENT && params.RUN_SECOND_REQUIREMENT && params.RUN_THIRD_REQUIREMENT) {
     echo "All requirements PASSED, Push allowed on the next build"
-  } else {
-    echo "Conditions not met, Push NOT allowed on the next build"
   }
 }
 
 def runSecondScript() {
-  if (params.COMMIT_AND_PUSH) {
-        echo "Committing and Pushing changes"
-        sh "git add ."
-        sh "git commit -m 'updated file'"
-        sh "git push -u origin main"
-    } else {
-        echo "No changes to commit and push."
+    try {
+        // Perform a Git commit
+        sh "git commit -am 'Auto-commit changes'"
+
+        // Push changes to the remote repository
+        sh "git push origin master" // Modify the branch name as needed
+    } catch (Exception e) {
+        error("Failed to commit and push changes: ${e.message}")
     }
 }
