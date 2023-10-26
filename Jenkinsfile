@@ -32,7 +32,7 @@ pipeline {
       }
       steps {
         script {
-          sh "git push origin ${BRANCH_NAME}"
+          sh "git push origin main"
         }
       }
     }
