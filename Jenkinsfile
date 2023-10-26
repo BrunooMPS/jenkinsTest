@@ -8,8 +8,6 @@ pipeline {
     booleanParam(defaultValue: false, description: 'Run the second script', name: 'RUN_SECOND_SCRIPT')
   }
 
-  stages {
-    
     stage('Requirements') {
       when {
         expression {
@@ -26,24 +24,18 @@ pipeline {
     }
 
     stage('Push') {
-    when {
+      when {
         expression {
-            params.RUN_SECOND_SCRIPT == true
+          params.RUN_SECOND_SCRIPT == true
         }
-    }
-    steps {
+      }
+      steps {
         script {
-            try {
-                // Assuming the Git credentials and URL are pre-configured in Jenkins.
-                sh 'git push origin main'
-            } catch (Exception e) {
-                currentBuild.result = 'FAILURE'
-                error("Failed to commit and push: ${e.message}")
-            }
+          runSecondScript()
         }
+      }
     }
   }
-}
 
   post {
     success {
@@ -53,4 +45,11 @@ pipeline {
       echo "Pipeline failed"
     }
   }
+}
+
+def runSecondScript() {
+    echo "Committing and Pushing changes"
+    sh "git add ."
+    sh "git commit -m 'updated file'"
+    sh "git push -u origin main"
 }
