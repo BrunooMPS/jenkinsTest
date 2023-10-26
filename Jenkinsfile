@@ -35,7 +35,7 @@ pipeline {
       }
     steps {
         script {
-          sh 'git clone ${url}'
+          sh "git clone ${url}"
         }
     }
   }
