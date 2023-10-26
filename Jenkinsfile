@@ -35,7 +35,8 @@ pipeline {
 
             // Check for changes in the repository
             def changes = sh(returnStatus: true, script: 'git diff --exit-code')
-
+            println(changes)
+            println("hahahahahaha")
             // If there are changes, commit and push them
             if (changes != 0) {
                 sh 'git add .'
