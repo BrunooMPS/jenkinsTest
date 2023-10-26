@@ -25,11 +25,6 @@ pipeline {
     }
 
     stage('Clone') {
-    when {
-        expression {
-            params.RUN_SECOND_SCRIPT == true
-        }
-    }
     steps {
         script {
           def url = "https://github.com/BrunooMPS/jenkinsTest.git"
