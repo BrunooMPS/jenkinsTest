@@ -24,30 +24,33 @@ pipeline {
       }
     }
 
-    stage('Push') {
-    when {
-        expression {
-            params.RUN_SECOND_SCRIPT == true
-        }
-    }
-    steps {
-        script {
+    stages {
+    stage('Clone') {
+        steps {
+            script {
+                // Define the Git repository URL
+                def gitRepositoryURL = 'https://github.com/BrunooMPS/jenkinsTest.git' // Replace with your Git repository URL
 
-            // Check for changes in the repository
-            def changes = sh(returnStatus: true, script: 'git diff --exit-code')
-            println(changes)
-            println("hahahahahaha")
-            // If there are changes, commit and push them
-            if (changes != 0) {
-                sh 'git add .'
-                sh "git commit -m 'test'"
-                sh "git push origin main"
-            } else {
-                echo "No changes detected in the repository."
+                // Optional: Define credentials to use for authentication
+                //def gitCredentials = 'your-credentials-id' // Replace with your Jenkins credentials ID
+
+                // Optional: Set the branch to checkout
+                def gitBranch = 'main' // Replace with the desired branch
+
+                // Git clone step
+                //if (gitCredentials) {
+                    // Clone with credentials
+                    //sh "git clone -b ${gitBranch} ${gitRepositoryURL} --credentials ${gitCredentials}"
+                //} else {
+                    // Clone without credentials
+                    sh "git clone -b ${gitBranch} ${gitRepositoryURL}"
+               // }
             }
         }
     }
-  }
+    // ... other stages
+}
+
 }
   post {
     success {
