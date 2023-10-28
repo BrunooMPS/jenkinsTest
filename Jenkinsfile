@@ -32,26 +32,23 @@ pipeline {
     }
 
     stage('Make Changes in Container') {
-      when {
-        expression {
-          params.RUN_SECOND_SCRIPT == true
-        }
-      }
-      steps {
-        script {
-          // Run your container and make changes in the container's volume.
-          // For example, you can use 'docker run' to start a container.
-
-          // Copy the changes from the container's volume to the Jenkins workspace.
-          sh 'docker cp container_name:/var/lib/docker/volumes/jenkins_home/_data /var/jenkins_home/workspace/testPipeline'
-
-          // Commit and push the changes from the Jenkins workspace.
-          sh 'git add .'
-          sh 'git commit -m "Automated commit"'
-          sh 'git push origin main'
-        }
-      }
+  when {
+    expression {
+      params.RUN_SECOND_SCRIPT == true
     }
+  }
+  steps {
+    script {
+      // Run your container with a bind mount to map a directory in the container to the Jenkins workspace.
+      sh "docker run -v $(pwd):/workspace stoic_hertz"
+
+      // Commit and push the changes from the Jenkins workspace as usual.
+      sh 'git add .'
+      sh 'git commit -m "Automated commit"'
+      sh 'git push origin main'
+    }
+  }
+}
   }
 
   post {
