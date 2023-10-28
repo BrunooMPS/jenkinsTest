@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-    parameters {
+parameters {
     booleanParam(defaultValue: false, description: 'Run the first requirement', name: 'RUN_FIRST_REQUIREMENT')
     booleanParam(defaultValue: false, description: 'Run the second requirement', name: 'RUN_SECOND_REQUIREMENT')
     booleanParam(defaultValue: false, description: 'Run the third requirement', name: 'RUN_THIRD_REQUIREMENT')
@@ -9,7 +9,8 @@ pipeline {
   }
 
     stages {
-    stage('Requirements') {
+
+        stage('Requirements') {
       when {
         expression {
           params.RUN_SECOND_SCRIPT == false
@@ -23,15 +24,26 @@ pipeline {
         }
       }
     }
+
+        stage("Clone Git Repository") {
+            steps {
+                git(
+                    url: "https://github.com/BrunooMPS/jenkinsTest.git",
+                    branch: "main",
+                    changelog: true,
+                    poll: true
+                )
+            }
+        }
         stage("Create artifacts or make changes") {
             when {
         expression {
           params.RUN_SECOND_SCRIPT == true
         }
       }
-            
             steps {
-                sh "git add ."
+                sh "touch testfile"
+                sh "git add testfile"
                 sh "git commit -m 'Add testfile from Jenkins Pipeline'"
             }
         }
@@ -48,8 +60,7 @@ pipeline {
             }
         }
     }
-
-      post {
+    post {
     success {
       echo "Pipeline succeeded"
     }
