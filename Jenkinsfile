@@ -40,7 +40,8 @@ pipeline {
   steps {
     script {
       // Run your container with a bind mount to map a directory in the container to the Jenkins workspace.
-      sh "docker run -v $(pwd):/workspace stoic_hertz"
+      sh "docker run -v \$(pwd):/workspace stoic_hertz"
+
 
       // Commit and push the changes from the Jenkins workspace as usual.
       sh 'git add .'
