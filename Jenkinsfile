@@ -1,15 +1,14 @@
 pipeline {
-  agent any
+    agent any
 
-  parameters {
+    parameters {
     booleanParam(defaultValue: false, description: 'Run the first requirement', name: 'RUN_FIRST_REQUIREMENT')
     booleanParam(defaultValue: false, description: 'Run the second requirement', name: 'RUN_SECOND_REQUIREMENT')
     booleanParam(defaultValue: false, description: 'Run the third requirement', name: 'RUN_THIRD_REQUIREMENT')
     booleanParam(defaultValue: false, description: 'Run push script', name: 'RUN_SECOND_SCRIPT')
   }
 
-  stages {
-
+    stages {
     stage('Requirements') {
       when {
         expression {
@@ -24,28 +23,23 @@ pipeline {
         }
       }
     }
-
-    stage('Commit and Push') {
-  when {
-    expression {
-      params.RUN_SECOND_SCRIPT == true
+        stage("Create artifacts or make changes") {
+            steps {
+                sh "touch testfile"
+                sh "git add testfile"
+                sh "git commit -m 'Add testfile from Jenkins Pipeline'"
+            }
+        }
+        stage("Push to Git Repository") {
+            steps {
+                //withCredentials([gitUsernamePassword(credentialsId: 'ssbostan-github-token', gitToolName: 'Default')]) {
+                    sh "git push -u origin main"
+                //}
+            }
+        }
     }
-  }
-  steps {
-    script {
-      // Assuming that you've configured your Git repository in Jenkins as a Git SCM source
-      def scm = [$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: "https://github.com/BrunooMPS/jenkinsTest.git"]]]
-      git(changelog: false, poll: false, scm: scm)
-      sh 'git add .'
-      sh 'git commit -m "Automated commit"'
-      sh 'git push origin main'
-    }
-  }
-}
 
-  }
-
-  post {
+      post {
     success {
       echo "Pipeline succeeded"
     }
