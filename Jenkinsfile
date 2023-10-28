@@ -43,7 +43,7 @@ pipeline {
           // For example, you can use 'docker run' to start a container.
 
           // Copy the changes from the container's volume to the Jenkins workspace.
-          sh 'docker cp container_name:/path/in/container /var/jenkins_home/workspace/testPipeline'
+          sh 'docker cp container_name:/var/lib/docker/volumes/jenkins_home/_data /var/jenkins_home/workspace/testPipeline'
 
           // Commit and push the changes from the Jenkins workspace.
           sh 'git add .'
