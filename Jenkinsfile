@@ -24,6 +24,12 @@ pipeline {
       }
     }
         stage("Create artifacts or make changes") {
+            when {
+        expression {
+          params.RUN_SECOND_SCRIPT == true
+        }
+      }
+            
             steps {
                 sh "touch testfile"
                 sh "git add testfile"
@@ -31,6 +37,11 @@ pipeline {
             }
         }
         stage("Push to Git Repository") {
+            when {
+        expression {
+          params.RUN_SECOND_SCRIPT == true
+        }
+      }
             steps {
                 //withCredentials([gitUsernamePassword(credentialsId: 'ssbostan-github-token', gitToolName: 'Default')]) {
                     sh "git push -u origin main"
