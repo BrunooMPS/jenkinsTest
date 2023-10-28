@@ -31,8 +31,7 @@ pipeline {
       }
             
             steps {
-                sh "touch testfile"
-                sh "git add testfile"
+                sh "git add ."
                 sh "git commit -m 'Add testfile from Jenkins Pipeline'"
             }
         }
