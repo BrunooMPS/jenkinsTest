@@ -9,12 +9,6 @@ pipeline {
   }
 
   stages {
-    /*stage('Checkout') {
-      steps {
-        // Check out the source code from your Git repository.
-        checkout scm
-      }
-    }*/
 
     stage('Requirements') {
       when {
