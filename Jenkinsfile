@@ -11,6 +11,7 @@ pipeline {
   stages {
     stage('Checkout SCM') {
       steps {
+        // Check out the source code from your Git repository.
         checkout scm
       }
     }
@@ -24,8 +25,24 @@ pipeline {
       steps {
         script {
           if (params.RUN_FIRST_REQUIREMENT && params.RUN_SECOND_REQUIREMENT && params.RUN_THIRD_REQUIREMENT) {
-            echo "All requirements PASSED, Push allowed on the next build"
+            echo "All requirements PASSED, Commit and Push allowed on the next build"
           }
+        }
+      }
+    }
+
+    stage('Commit and Push') {
+      when {
+        expression {
+          params.RUN_SECOND_SCRIPT == true
+        }
+      }
+      steps {
+        script {
+          // Commit and push changes to the Git repository.
+          sh 'git add .'
+          sh 'git commit -m "Automated commit"'
+          sh 'git push origin main'
         }
       }
     }
