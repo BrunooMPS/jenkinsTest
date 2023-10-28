@@ -31,7 +31,7 @@ pipeline {
       }
     }
 
-    stage('Commit and Push') {
+    stage('Make Changes in Container') {
       when {
         expression {
           params.RUN_SECOND_SCRIPT == true
@@ -39,18 +39,16 @@ pipeline {
       }
       steps {
         script {
-          // Create a new branch to work on
-          sh 'git checkout -b feature-branch'
+          // Run your container and make changes in the container's volume.
+          // For example, you can use 'docker run' to start a container.
 
-          // Perform any necessary changes to your code here.
-          // For example, you can use shell commands to modify files.
+          // Copy the changes from the container's volume to the Jenkins workspace.
+          sh 'docker cp container_name:/path/in/container /var/jenkins_home/workspace/testPipeline'
 
-          // Commit the changes
+          // Commit and push the changes from the Jenkins workspace.
           sh 'git add .'
           sh 'git commit -m "Automated commit"'
-
-          // Push the changes to the Git repository
-          sh 'git push origin feature-branch'
+          sh 'git push origin main'
         }
       }
     }
