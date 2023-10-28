@@ -8,13 +8,13 @@ pipeline {
     booleanParam(defaultValue: false, description: 'Run push script', name: 'RUN_SECOND_SCRIPT')
   }
 
-  stages {
-    stage('Checkout SCM') {
+  /*stages {
+    stage('Checkout') {
       steps {
         // Check out the source code from your Git repository.
         checkout scm
       }
-    }
+    }*/
 
     stage('Requirements') {
       when {
