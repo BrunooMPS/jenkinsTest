@@ -31,25 +31,21 @@ pipeline {
       }
     }
 
-    stage('Make Changes in Container') {
-  when {
-    expression {
-      params.RUN_SECOND_SCRIPT == true
+    stage('Commit and Push') {
+      when {
+        expression {
+          params.RUN_SECOND_SCRIPT == true
+        }
+      }
+      steps {
+        script {
+          // Commit and push changes to the Git repository.
+          sh 'git add .'
+          sh 'git commit -m "Automated commit"'
+          sh 'git push origin main'
+        }
+      }
     }
-  }
-  steps {
-    script {
-      // Run your container with a bind mount to map a directory in the container to the Jenkins workspace.
-      sh 'docker run -v /var/jenkins_home/workspace/testPipeline:/workspace stoic_hertz'
-
-
-      // Commit and push the changes from the Jenkins workspace as usual.
-      sh 'git add .'
-      sh 'git commit -m "Automated commit"'
-      sh 'git push origin main'
-    }
-  }
-}
   }
 
   post {
