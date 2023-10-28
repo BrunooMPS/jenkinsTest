@@ -39,10 +39,18 @@ pipeline {
       }
       steps {
         script {
-          // Commit and push changes to the Git repository.
+          // Create a new branch to work on
+          sh 'git checkout -b feature-branch'
+
+          // Perform any necessary changes to your code here.
+          // For example, you can use shell commands to modify files.
+
+          // Commit the changes
           sh 'git add .'
           sh 'git commit -m "Automated commit"'
-          sh 'git push origin main'
+
+          // Push the changes to the Git repository
+          sh 'git push origin feature-branch'
         }
       }
     }
