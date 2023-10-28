@@ -26,20 +26,23 @@ pipeline {
     }
 
     stage('Commit and Push') {
-      when {
-        expression {
-          params.RUN_SECOND_SCRIPT == true
-        }
-      }
-      steps {
-        script {
-          // Commit and push changes to the Git repository.
-          sh 'git add .'
-          sh 'git commit -m "Automated commit"'
-          sh 'git push origin main'
-        }
-      }
+  when {
+    expression {
+      params.RUN_SECOND_SCRIPT == true
     }
+  }
+  steps {
+    script {
+      // Assuming that you've configured your Git repository in Jenkins as a Git SCM source
+      def scm = [$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: "https://github.com/BrunooMPS/jenkinsTest.git"]]]
+      git(changelog: false, poll: false, scm: scm)
+      sh 'git add .'
+      sh 'git commit -m "Automated commit"'
+      sh 'git push origin main'
+    }
+  }
+}
+
   }
 
   post {
