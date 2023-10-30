@@ -64,11 +64,12 @@ pipeline {
                 }
             }
             steps {
-                script {
+               script {
             withCredentials([string(credentialsId: "testCredentials", variable: "GITHUB_PAT")]) {
-                sh "git push -u https://github.com/BrunooMPS/jenkinsTest.git main"
+                sh "git config --global credential.helper store" // Use Git credential helper
+                sh "git push -u origin main"
             }
-                }
+        }
             }
         }
     }
