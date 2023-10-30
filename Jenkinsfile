@@ -48,7 +48,6 @@ pipeline {
             steps {
                script {
             withCredentials([string(credentialsId: "testCredentials", variable: "GITHUB_PAT")]) {
-                sh "git config --global credential.helper store" // Use Git credential helper
                 sh "git push -u origin main"
             }
         }
