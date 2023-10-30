@@ -56,7 +56,9 @@ pipeline {
             }
             steps {
                 script {
-                  sh "git push -u origin main"
+                 withCredentials([usernamePassword(credentialsId: "credsTest", usernameVariable: "GIT_USERNAME", passwordVariable: "GIT_PASSWORD")]) {
+                    sh "git push -u origin main"
+                    }
                 }
             }
         }
