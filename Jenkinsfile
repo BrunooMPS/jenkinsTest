@@ -66,7 +66,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([string(credentialsId: "testCredentials", variable: "GITHUB_PAT")]) {
-                        sh "git push -u origin main"
+                        sh "git push -u https://brunosusana99@hotmail.com:${GITHUB_PAT}@github.com/BrunooMPS/jenkinsTest.git main"
                     }
                 }
             }
