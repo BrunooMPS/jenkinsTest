@@ -30,7 +30,7 @@ pipeline {
                     if (params.RUN_SECOND_SCRIPT == true) {
                         echo "Skipping cloning, since this is a push-only script"
                     } else {
-                        withCredentials([usernamePassword(credentialsId: 'YourCredentialsID', usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_PAT')]) {
+                        withCredentials([usernamePassword(credentialsId: "testCredentials", usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_PAT')]) {
                             git(
                                 url: "https://github.com/BrunooMPS/jenkinsTest.git",
                                 branch: "main",
@@ -52,7 +52,7 @@ pipeline {
             }
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'YourCredentialsID', usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_PAT')]) {
+                    withCredentials([usernamePassword(credentialsId: "testCredentials", usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_PAT')]) {
                         sh "touch testfile"
                         sh "git add testfile"
                         sh "git commit -m 'Add testfile from Jenkins Pipeline'"
@@ -69,7 +69,7 @@ pipeline {
             }
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'YourCredentialsID', usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_PAT')]) {
+                    withCredentials([usernamePassword(credentialsId: "testCredentials", usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_PAT')]) {
                         sh "git push -u origin main"
                     }
                 }
