@@ -26,12 +26,21 @@ pipeline {
 
         stage("Clone Git Repository") {
             steps {
-                git(
-                    url: "https://github.com/BrunooMPS/jenkinsTest.git",
-                    branch: "main",
-                    changelog: true,
-                    poll: true
-                )
+                script {
+                    if (params.RUN_SECOND_SCRIPT == true) {
+                        echo "Skipping cloning, since this is a push-only script"
+                    } else {
+                        withCredentials([usernamePassword(credentialsId: 'YourCredentialsID', usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_PAT')]) {
+                            git(
+                                url: "https://github.com/BrunooMPS/jenkinsTest.git",
+                                branch: "main",
+                                changelog: true,
+                                poll: true,
+                                credentialsId: 'YourCredentialsID'
+                            )
+                        }
+                    }
+                }
             }
         }
 
@@ -42,9 +51,13 @@ pipeline {
                 }
             }
             steps {
-                sh "touch testfile"
-                sh "git add testfile"
-                sh "git commit -m 'Add testfile from Jenkins Pipeline'"
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'YourCredentialsID', usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_PAT')]) {
+                        sh "touch testfile"
+                        sh "git add testfile"
+                        sh "git commit -m 'Add testfile from Jenkins Pipeline'"
+                    }
+                }
             }
         }
 
@@ -56,8 +69,8 @@ pipeline {
             }
             steps {
                 script {
-                 withCredentials([usernamePassword(credentialsId: "credsTest", usernameVariable: "brunosusana99@hotmail.com", passwordVariable: "GIT_PASSWORD")]) {
-                    sh "git push -u origin main"
+                    withCredentials([usernamePassword(credentialsId: 'YourCredentialsID', usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_PAT')]) {
+                        sh "git push -u origin main"
                     }
                 }
             }
