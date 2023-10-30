@@ -65,7 +65,7 @@ pipeline {
             }
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: "testCredentials", usernameVariable: "GITHUB_USERNAME", passwordVariable: "GITHUB_PAT")]) {
+                    withCredentials([string(credentialsId: "testCredentials", variable: 'GITHUB_PAT')]) {
                         sh "git push -u origin main"
                     }
                 }
