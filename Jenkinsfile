@@ -24,25 +24,7 @@ pipeline {
             }
         }
 
-        stage("Clone Git Repository") {
-            steps {
-                script {
-                    if (params.RUN_SECOND_SCRIPT == true) {
-                        echo "Skipping cloning, since this is a push-only script"
-                    } else {
-                            git(
-                                url: "https://github.com/BrunooMPS/jenkinsTest.git",
-                                branch: "main",
-                                changelog: true,
-                                poll: true,
-                                credentialsId: 'YourCredentialsID'
-                            )
-                    }
-                }
-            }
-        }
-
-        stage("Create artifacts or make changes") {
+        stage("Changes") {
             when {
                 expression {
                     params.RUN_SECOND_SCRIPT == true
