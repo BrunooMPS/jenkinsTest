@@ -20,24 +20,12 @@ pipeline {
                     if (params.RUN_FIRST_REQUIREMENT && params.RUN_SECOND_REQUIREMENT && params.RUN_THIRD_REQUIREMENT) {
                         echo "All requirements PASSED, Commit and Push allowed on the next build"
                     }else{echo "NOT all requirements PASSED, Commit and Push NOT allowed on the next build"}
+
+                    sh"git checkout main"
                 }
+                
             }
         }
-
-        /*stage("Changes") {
-            when {
-                expression {
-                    params.RUN_SECOND_SCRIPT == true
-                }
-            }
-            steps {
-                script {
-                        sh "touch testfile"
-                        sh "git add ."
-                        sh "git commit -m 'Add testfile from Jenkins Pipeline'"
-                }
-            }
-        }*/
 
         stage("Push to Git Repository") {
             when {
@@ -48,8 +36,8 @@ pipeline {
             steps {
                script {
                 sh "touch testfile"
-                        sh "git add ."
-                        sh "git commit -m 'Add testfile from Jenkins Pipeline'"
+                sh "git add ."
+                sh "git commit -m 'Add testfile from Jenkins Pipeline'"
                 sh "git push -u origin main"
         }
             }
