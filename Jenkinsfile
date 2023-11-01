@@ -47,7 +47,7 @@ pipeline {
             }
             steps {
                script {
-                sh "git push origin main"
+                sh "git push -u origin main"
         }
             }
         }
