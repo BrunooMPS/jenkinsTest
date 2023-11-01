@@ -24,7 +24,7 @@ pipeline {
             }
         }
 
-        stage("Changes") {
+        /*stage("Changes") {
             when {
                 expression {
                     params.RUN_SECOND_SCRIPT == true
@@ -37,7 +37,7 @@ pipeline {
                         sh "git commit -m 'Add testfile from Jenkins Pipeline'"
                 }
             }
-        }
+        }*/
 
         stage("Push to Git Repository") {
             when {
@@ -47,6 +47,9 @@ pipeline {
             }
             steps {
                script {
+                sh "touch testfile"
+                        sh "git add ."
+                        sh "git commit -m 'Add testfile from Jenkins Pipeline'"
                 sh "git push -u origin main"
         }
             }
