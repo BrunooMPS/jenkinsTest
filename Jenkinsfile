@@ -22,6 +22,7 @@ pipeline {
                     }else{echo "NOT all requirements PASSED, Commit and Push NOT allowed on the next build"}
 
                     sh"git checkout main"
+                    sh"git remote add"
                 }
                 
             }
