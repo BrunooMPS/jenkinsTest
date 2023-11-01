@@ -34,7 +34,7 @@ pipeline {
                 script {
                         sh "touch testfile"
                         sh "git add ."
-                        sh "git commit -m Add testfile from Jenkins Pipeline"
+                        sh "git commit -m Add testfile 'from Jenkins Pipeline'"
                 }
             }
         }
