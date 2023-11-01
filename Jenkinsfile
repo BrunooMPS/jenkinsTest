@@ -9,6 +9,7 @@ pipeline {
     }
 
     stages {
+
         stage('Requirements') {
             when {
                 expression {
@@ -21,10 +22,18 @@ pipeline {
                         echo "All requirements PASSED, Commit and Push allowed on the next build"
                     }else{echo "NOT all requirements PASSED, Commit and Push NOT allowed on the next build"}
 
-                    sh"git checkout main"
-                    sh"git remote add"
+                    //sh"git checkout main"
+                    //sh"git remote add"
                 }
                 
+            }
+        }
+
+        stage("Clone Repository") {
+            steps {
+                script {
+                    checkout scm
+                }
             }
         }
 
