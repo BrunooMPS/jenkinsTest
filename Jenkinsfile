@@ -47,7 +47,7 @@ pipeline {
             }
             steps {
                script {
-                sh "git push origin bef00bb4e325841eb38ce0e53c04c83eb9a1302f:main"
+                sh "git push origin main"
         }
             }
         }
