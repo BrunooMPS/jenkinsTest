@@ -46,9 +46,8 @@ pipeline {
                 sh "touch testfile"
                 sh "git add ."
                 sh "git commit -m 'Add testfile from Jenkins Pipeline'"
-                withCredentials([gitUsernamePassword(credentialsId: 'helloWorld', gitToolName: 'git-tool')]) {
                 sh "git push -u origin main"
-        }}
+                }
             }
         }
     }
