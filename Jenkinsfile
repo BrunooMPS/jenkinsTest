@@ -46,7 +46,7 @@ pipeline {
                 sh "touch testfile"
                 sh "git add ."
                 sh "git commit -m 'Add testfile from Jenkins Pipeline'"
-                sh "git push origin:main HEAD:origin"
+                sh "git push -u origin main"
         }
             }
         }
