@@ -30,7 +30,6 @@ pipeline {
                         echo "All requirements PASSED, Commit and Push allowed on the next build"
                     }else{echo "NOT all requirements PASSED, Commit and Push NOT allowed on the next build"}
 
-                    //sh"git checkout main"
                     //sh"git remote add"
                 }
                 
@@ -45,8 +44,10 @@ pipeline {
             }
             steps {
                script {
+                sh"git checkout main"
                 sh "touch testfile"
                 sh "git add ."
+                
                 sh "git commit -m 'Add testfile from Jenkins Pipeline'"
                 sh "git push -u origin main"
         }
