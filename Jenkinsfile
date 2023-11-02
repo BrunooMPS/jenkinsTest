@@ -43,9 +43,9 @@ pipeline {
             steps {
                script {
                 //sh"git checkout main"
-                sh "touch testfile"
-                sh "git add ."
-                sh "git commit -m 'Add testfile from Jenkins Pipeline'"
+                sh "touch testfile2"
+                sh "git add testfile2"
+                sh "git commit -m 'Add testfile2 from Jenkins Pipeline'"
                 sh "git push -u origin main"
                 }
             }
