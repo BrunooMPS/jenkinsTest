@@ -29,8 +29,6 @@ pipeline {
                     if (params.RUN_FIRST_REQUIREMENT && params.RUN_SECOND_REQUIREMENT && params.RUN_THIRD_REQUIREMENT) {
                         echo "All requirements PASSED, Commit and Push allowed on the next build"
                     }else{echo "NOT all requirements PASSED, Commit and Push NOT allowed on the next build"}
-
-                    //sh"git remote add"
                 }
                 
             }
@@ -44,7 +42,8 @@ pipeline {
             }
             steps {
                script {
-                sh"git checkout main"
+                //sh"git checkout main"
+                sh"git remote set-url origin git@github.com:BrunooMPS/jenkinsTest.git"
                 sh "touch testfile"
                 sh "git add ."
                 
