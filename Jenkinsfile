@@ -9,15 +9,7 @@ pipeline {
     }
 
     stages {
-
-        /*stage("Clone Repository") {
-            steps {
-                script {
-                    checkout scm
-                }
-            }
-        }*/
-
+        
         stage('Requirements') {
             when {
                 expression {
