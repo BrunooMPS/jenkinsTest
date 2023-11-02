@@ -43,12 +43,10 @@ pipeline {
             steps {
                script {
                 //sh"git checkout main"
-                sh"git remote set-url origin git@github.com:BrunooMPS/jenkinsTest.git"
                 sh "touch testfile"
                 sh "git add ."
-                
                 sh "git commit -m 'Add testfile from Jenkins Pipeline'"
-                sh "git push -u origin main"
+                sh "git push origin:main"
         }
             }
         }
